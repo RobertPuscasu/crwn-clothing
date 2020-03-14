@@ -1,11 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import './App.css';
 import Main from './layouts/Main/Main';
+import { Switch, Route } from 'react-router-dom'
 
-function App() {
+const HatsPage: React.FC = () => (
+  <div>
+    <h1>HATS PAGE</h1>
+  </div>
+)
+
+const App: React.FC = () => {
   return (
     <div>
-      <Main />
+      <Switch>
+        <Route  exact path='/' component={Main} />
+        <Route  path='/hats' component={HatsPage} />
+      </Switch>
     </div>
   );
 }
