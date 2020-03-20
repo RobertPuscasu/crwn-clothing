@@ -28,7 +28,7 @@ const Login: React.FC = () => {
 	const handlePasswordChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		setCredentials({'email': credentials.email, 'password': value})
+		setCredentials({'email': value, 'password': value})
 	}
 	return (
 		<div className='sign-in'>

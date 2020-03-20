@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 import './style.scss'
 import {ReactComponent as Logo} from '../../../assets/crown.svg'
 import { auth } from '../../../firebase/firebase'
+import { IAuthenticatedUser } from '../../../interfaces/models/auth-user.model';
 
 interface ITopBarProps {
-	currentUser: firebase.User | null;
+	currentUser: IAuthenticatedUser;
 }
 
 const TopBar: React.FC<ITopBarProps> = ({ currentUser }) => (
