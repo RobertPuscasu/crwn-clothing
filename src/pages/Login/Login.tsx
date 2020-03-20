@@ -1,64 +1,72 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import './style.scss'
+import './style.scss';
 import { IUserModel } from '../../interfaces/models/user.model';
 import LoginForm from '../../forms/LoginForm/LoginForm';
 import Button from '../../forms/Button/Button';
-import { signInWithGoogle } from '../../firebase/firebase';
+import { auth, signInWithGoogle } from '../../firebase/firebase';
 
 const Login: React.FC = () => {
+  const [credentials, setCredentials] = React.useState<IUserModel>({
+    email: '',
+    password: ''
+  });
 
-	const [credentials, setCredentials] = React.useState<IUserModel>({
-		email: '',
-		password: ''
-	});
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
 
-	const handleSubmit = (event: { preventDefault: () => void; }) => {
-		event.preventDefault();
+    const { email, password } = credentials;
 
-		setCredentials({email: '', password: ''});
-	}
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setCredentials({ email: '', password: '' });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	const handleEmailChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
-		const {value, name} = event.target;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
 
-		setCredentials({'email': value, 'password': credentials.password})
-	}
+    if (Object.keys(credentials).includes(name)) {
+      setCredentials({ ...credentials, [name]: value } as Pick<
+        IUserModel,
+        keyof IUserModel
+      >);
+    }
+  };
+  return (
+    <div className="sign-in">
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
 
-	const handlePasswordChange = (event:  React.ChangeEvent<HTMLInputElement>) => {
-		const {value, name} = event.target;
+      <form onSubmit={handleSubmit}>
+        <LoginForm
+          name="email"
+          type="email"
+          value={credentials.email}
+          onChange={handleChange}
+          label="email"
+          required
+        />
+        <LoginForm
+          name="password"
+          type="password"
+          value={credentials.password}
+          onChange={handleChange}
+          label="password"
+          required
+        />
 
-		setCredentials({'email': value, 'password': value})
-	}
-	return (
-		<div className='sign-in'>
-			<h2>I already have an account</h2>
-			<span>Sign in with your email and password</span>
-		
-			<form onSubmit={handleSubmit}>
-				<LoginForm 
-				name='email' 
-				type='email' 
-				value={credentials.email} 
-				onChange={handleEmailChange}
-				label='email'
-				required />
-				<LoginForm 
-				name='password' 
-				type='password' 
-				value={credentials.password} 
-				onChange={handlePasswordChange}
-				label='password'
-				required />
-
-				<div className='buttons'>
-					<Button type='submit'>Sign In</Button>
-					<Button onClick={signInWithGoogle} isGoogleSignIn>Sign In With Google</Button>
-				</div>
-			</form>
-		</div>
-	);
-
-}
+        <div className="buttons">
+          <Button type="submit">Sign In</Button>
+          <Button onClick={signInWithGoogle} isGoogleSignIn>
+            Sign In With Google
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default Login;
