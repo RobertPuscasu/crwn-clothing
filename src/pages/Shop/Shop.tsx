@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState } from 'react';
 import { IShop } from '../../interfaces/models/shop.model';

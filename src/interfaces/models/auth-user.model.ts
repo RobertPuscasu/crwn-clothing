@@ -1,6 +1,6 @@
 export interface IAuthenticatedUser {
 	id: string,
-	createdAt: string;
+	createdAt: Date;
 	email: string;
 	displayName: string;
 }

@@ -8,25 +8,38 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 import { useEffect } from 'react';
 import { IAuthenticatedUser } from './interfaces/models/auth-user.model';
 import SignInAndSignUp from './pages/SignInAndSignUp/SignInAndSignUp';
+import { useDispatch } from 'react-redux';
+import { createUser } from './store/user/user.actions';
+
+export const EMPTY_USER: IAuthenticatedUser = Object.freeze({
+  id: '',
+  createdAt: Object.create(null) as Date,
+  email: '',
+  displayName: ''
+})
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = React.useState<IAuthenticatedUser>(
     Object.create(null) as IAuthenticatedUser
   );
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth) {
+      if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth, {});
-        userRef!.onSnapshot(snapShot => {
-            setCurrentUser({
+        userRef!.onSnapshot(snapShot =>
+          dispatch(
+            createUser.request({
               id: snapShot.id,
               ...snapShot.data()
             } as IAuthenticatedUser)
-        });
+          )
+        );
       }
 
-      setCurrentUser(Object.create(null) as IAuthenticatedUser)
+      dispatch(createUser.request(Object.create(null) as IAuthenticatedUser));
     });
 
     return () => unsubscribeFromAuth();
@@ -34,11 +47,11 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <TopBar currentUser={currentUser} />
+      <TopBar />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/shop" component={Shop} />
-        <Route path="/signin" component={SignInAndSignUp} />  
+        <Route path="/signin" component={SignInAndSignUp} />
       </Switch>
     </div>
   );
