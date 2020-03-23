@@ -4,6 +4,7 @@ import { ISignUpState } from '../../interfaces/states/signup.state';
 import Button from '../../forms/Button/Button';
 import { auth, createUserProfileDocument } from './../../firebase/firebase';
 import './style.scss';
+
 const Signup: React.FC = () => {
   const [signup, setSignup] = React.useState<ISignUpState>({
     displayName: '',

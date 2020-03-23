@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import Main from './layouts/Main/Main';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Shop from './pages/Shop/Shop';
 import TopBar from './layouts/Main/Topbar/Topbar';
 import { auth, createUserProfileDocument } from './firebase/firebase';
@@ -16,7 +16,7 @@ export const EMPTY_USER: IAuthenticatedUser = Object.freeze({
   createdAt: Object.create(null) as Date,
   email: '',
   displayName: ''
-})
+});
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = React.useState<IAuthenticatedUser>(
