@@ -8,8 +8,10 @@ import { auth, createUserProfileDocument } from './firebase/firebase';
 import { useEffect } from 'react';
 import { IAuthenticatedUser } from './interfaces/models/auth-user.model';
 import SignInAndSignUp from './pages/SignInAndSignUp/SignInAndSignUp';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from './store/user/user.actions';
+import { RootState } from 'typesafe-actions';
+import * as _ from 'lodash';
 
 export const EMPTY_USER: IAuthenticatedUser = Object.freeze({
   id: '',
@@ -24,6 +26,7 @@ const App: React.FC = () => {
   );
 
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.currentUser);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -51,7 +54,7 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/shop" component={Shop} />
-        <Route path="/signin" component={SignInAndSignUp} />
+        <Route exact path="/signin" render={() => _.isEmpty(user) ? (<SignInAndSignUp />): (<Redirect to='/' />)  } />
       </Switch>
     </div>
   );
