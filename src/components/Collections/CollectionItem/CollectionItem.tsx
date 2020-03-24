@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import './style.scss';
 import { IShopItem } from '../../../interfaces/models/shop-item.model';
+import Button from '../../../forms/Button/Button';
 
 const CollectionItem: React.FC<IShopItem>= (props) => (
   <div className="collection-item">
@@ -12,6 +13,8 @@ const CollectionItem: React.FC<IShopItem>= (props) => (
 		<span className='name'>{ props.name }</span>
 		<span className='price'>{ props.price }</span>
 	</div>
+
+	<Button inverted>Add to cart</Button>
   </div>
 );
 
