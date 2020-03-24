@@ -6,10 +6,12 @@ import { ReactComponent as Logo } from '../../../assets/crown.svg';
 import { auth } from '../../../firebase/firebase';
 import { useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
+import CartIcon from '../../../components/CartIcon/CartIcon';
+import CartDropdown from '../../../components/CartDropdown/CartDropdown';
 
 const TopBar: React.FC = React.memo(() => {
   const user = useSelector((state: RootState) => state.user.currentUser);
-
+  const toggleCart = useSelector((state: RootState) => state.cart.toggleCart.hidden)
   return (
     <div className="topbar">
       <Link className="logo-container" to="/">
@@ -31,7 +33,11 @@ const TopBar: React.FC = React.memo(() => {
             SIGN OUT
           </div>
         )}
+        <CartIcon />
       </div>
+      {
+        toggleCart ? null:  <CartDropdown />
+      }
     </div>
   );
 });
