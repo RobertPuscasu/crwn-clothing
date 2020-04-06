@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+import { ReactComponent as ShoppingIcon } from '../../../assets/shopping-bag.svg';
 import './style.scss';
 import { useDispatch } from 'react-redux';
-import { cartAction} from '../../store/cart/cart.actions'
+import { cartAction } from 'src/store/cart/cart.actions';
+
 const CartIcon: React.FC = () => {
 
   const dispatch  = useDispatch();

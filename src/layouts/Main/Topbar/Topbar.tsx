@@ -6,8 +6,8 @@ import { ReactComponent as Logo } from '../../../assets/crown.svg';
 import { auth } from '../../../firebase/firebase';
 import { useSelector } from 'react-redux';
 import { RootState } from 'typesafe-actions';
-import CartIcon from '../../../components/CartIcon/CartIcon';
-import CartDropdown from '../../../components/CartDropdown/CartDropdown';
+import CartDropdown from 'src/components/Carts/CartDropdown/CartDropdown';
+import CartIcon from 'src/components/Carts/CartIcon/CartIcon';
 
 const TopBar: React.FC = React.memo(() => {
   const user = useSelector((state: RootState) => state.user.currentUser);
