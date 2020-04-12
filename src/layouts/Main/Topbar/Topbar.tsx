@@ -5,13 +5,15 @@ import './style.scss';
 import { ReactComponent as Logo } from '../../../assets/crown.svg';
 import { auth } from '../../../firebase/firebase';
 import { useSelector } from 'react-redux';
-import { RootState } from 'typesafe-actions';
 import CartDropdown from 'src/components/Carts/CartDropdown/CartDropdown';
 import CartIcon from 'src/components/Carts/CartIcon/CartIcon';
+import { selectCurrentUser } from 'src/store/user/user.selectors';
+import { selectCardHidden } from 'src/store/cart/cart.selectors';
 
 const TopBar: React.FC = React.memo(() => {
-  const user = useSelector((state: RootState) => state.user.currentUser);
-  const toggleCart = useSelector((state: RootState) => state.cart.toggleCart.hidden)
+  const user = useSelector(selectCurrentUser)
+  const toggleCart = useSelector(selectCardHidden)
+
   return (
     <div className="topbar">
       <Link className="logo-container" to="/">

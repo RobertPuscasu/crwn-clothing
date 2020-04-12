@@ -10,8 +10,9 @@ import { IAuthenticatedUser } from './interfaces/models/auth-user.model';
 import SignInAndSignUp from './pages/SignInAndSignUp/SignInAndSignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser } from './store/user/user.actions';
-import { RootState } from 'typesafe-actions';
 import * as _ from 'lodash';
+import { selectCurrentUser } from './store/user/user.selectors';
+import Checkout from './pages/Checkout/Checkout';
 
 export const EMPTY_USER: IAuthenticatedUser = Object.freeze({
   id: '',
@@ -21,12 +22,9 @@ export const EMPTY_USER: IAuthenticatedUser = Object.freeze({
 });
 
 const App: React.FC = () => {
-  const [currentUser, setCurrentUser] = React.useState<IAuthenticatedUser>(
-    Object.create(null) as IAuthenticatedUser
-  );
 
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user.currentUser);
+  const user = useSelector(selectCurrentUser);
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -54,7 +52,9 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/shop" component={Shop} />
+        <Route path="/checkout" component={Checkout} />
         <Route exact path="/signin" render={() => _.isEmpty(user) ? (<SignInAndSignUp />): (<Redirect to='/' />)  } />
+       
       </Switch>
     </div>
   );
