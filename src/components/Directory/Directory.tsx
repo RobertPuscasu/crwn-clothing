@@ -5,10 +5,8 @@ import './style.scss';
 
 import MenuItem from '../MenuItem/MenuItem';
 
-interface IDirectoryProps {}
 
-
-const Directory: React.FC<IDirectoryProps> = (props) => {
+const Directory: React.FC = () => {
 
 	const [sections, setSections] = useState<IDirectoryState[]>([
 			{

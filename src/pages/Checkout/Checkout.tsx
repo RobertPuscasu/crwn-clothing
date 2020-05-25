@@ -4,6 +4,7 @@ import './style.scss'
 import { IShopItem } from 'src/interfaces/models/shop-item.model';
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartTotal } from 'src/store/cart/cart.selectors';
+import CheckoutItem from 'src/components/Checkout/CheckoutItem/CheckoutItem';
 
 const Checkout: React.FC = () => {
 	const cartItems: IShopItem[] = useSelector(selectCartItems);
@@ -29,7 +30,8 @@ const Checkout: React.FC = () => {
 			</div>
 		</div>
 		{
-			cartItems.map(cartItem => (cartItem.name))
+			cartItems.map(cartItem => 
+				<CheckoutItem key={cartItem.id} item={cartItem}></CheckoutItem>)
 		}
 
 		<div className='total'>

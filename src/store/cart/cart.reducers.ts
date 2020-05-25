@@ -11,7 +11,7 @@ const INITIAL_STATE: ICartState = {
 };
 
 export const toggleCart = createReducer<boolean>(
-  false
+  true
 ).handleAction(cartAction, (state, action) => !state);
 
 export const addCart = createReducer<IShopItem[]>(

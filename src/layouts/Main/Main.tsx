@@ -2,8 +2,7 @@ import * as React from 'react';
 import './style.scss';
 import Directory from '../../components/Directory/Directory';
 
-interface IProps {}
-const Main: React.FC<IProps> = props => (
+const Main: React.FC = () => (
   <div className="main">
     <Directory />
   </div>
