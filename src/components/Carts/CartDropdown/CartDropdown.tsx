@@ -19,7 +19,8 @@ const CartDropdown: React.FC<RouteComponentProps> = (props) => {
         {
           cartItems.length ? (
           cartItems.map(cartItem => 
-            (<CartItem key={cartItem.id} item={cartItem}></CartItem>))) : (
+            (<CartItem key={cartItem.id} item={cartItem}></CartItem>
+))) : (
           <span className='empty-message'>Your cart is empty</span>
         )}
       </div>
