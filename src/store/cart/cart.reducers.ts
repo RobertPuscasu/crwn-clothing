@@ -1,14 +1,8 @@
 import { createReducer } from 'typesafe-actions';
 import { cartAction, addCartAction, clearItemFromCart, removeItemAction } from './cart.actions';
 import { combineReducers } from 'redux';
-import { ICartState } from 'src/interfaces/states/cart.state';
 import { addItemToCart, removeItemFromCart } from '../../utils/cart.utils';
 import { IShopItem } from '../../interfaces/models/shop-item.model';
-
-const INITIAL_STATE: ICartState = {
-  hidden: true,
-  cartItems: []
-};
 
 export const toggleCart = createReducer<boolean>(
   true

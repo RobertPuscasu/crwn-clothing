@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Observable, from } from 'rxjs';
 import { endpoints } from './endpoints'
 import { map } from 'rxjs/operators';
-import { IUserModel } from '../interfaces/models/user.model';
 import { IAuthenticatedUser } from 'src/interfaces/models/auth-user.model';
 
 export class UserService {

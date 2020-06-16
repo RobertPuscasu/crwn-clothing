@@ -1,5 +1,4 @@
 import { IShopItem } from 'src/interfaces/models/shop-item.model';
-import { filter, map } from 'rxjs/operators';
 
 export const addItemToCart = (cartItems: IShopItem[], cartItemToAdd: IShopItem): IShopItem[] => {
 	const existingCartItem = cartItems.find(

@@ -2,7 +2,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-type DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 const config = {
   apiKey: 'AIzaSyCTIhySeXpXUK6WP9UnJvs2_wZxBJ3lmlA',
