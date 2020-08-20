@@ -1,6 +1,6 @@
 
 import { IShop } from '../models/shop.model';
 
-export interface ICollectionsState extends IShop{
-	
+export interface ICollectionsState {
+	collection: { [key:string]: IShop }
 }

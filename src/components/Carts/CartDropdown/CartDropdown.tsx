@@ -5,11 +5,11 @@ import Button from 'src/forms/Button/Button';
 import CartItem from '../CartItem/CartItem';
 import { IShopItem } from 'src/interfaces/models/shop-item.model';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { selectCartItems } from 'src/store/cart/cart.selectors';
 import { cartAction } from 'src/store/cart/cart.actions'
+import { push } from 'connected-react-router';
 
-const CartDropdown: React.FC<RouteComponentProps> = (props) => {
+const CartDropdown: React.FC = () => {
   const cartItems: IShopItem[] = useSelector(selectCartItems)
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const CartDropdown: React.FC<RouteComponentProps> = (props) => {
       </div>
       <Button onClick={() => 
         {
-          props.history.push('/checkout');
+          dispatch(push('checkout'))
           dispatch(cartAction());
           }}>
           GO TO CHECKOUT</Button>
@@ -34,4 +34,4 @@ const CartDropdown: React.FC<RouteComponentProps> = (props) => {
   );
 };
 
-export default withRouter(CartDropdown);
+export default CartDropdown;

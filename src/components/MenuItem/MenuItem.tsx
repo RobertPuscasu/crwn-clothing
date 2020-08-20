@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './style.scss'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
 
 interface IMenuItemProps {
   title: string;
@@ -9,8 +10,10 @@ interface IMenuItemProps {
   linkUrl: string
 }
 
-const MenuItem: React.FC<IMenuItemProps & RouteComponentProps> = ({ title, imageUrl, size, history, linkUrl, match }) => (
-  <div className={`${size} menu-item`} onClick={() => history.push(`${match.url}${linkUrl}`)}>
+const MenuItem: React.FC<IMenuItemProps> = ({ title, imageUrl, size, linkUrl }) => {
+  const dispatch = useDispatch();
+  return (
+  <div className={`${size} menu-item`} onClick={() => dispatch(push(`${linkUrl}`))}>
     <div
 	  className='background-image'
       style=
@@ -24,5 +27,6 @@ const MenuItem: React.FC<IMenuItemProps & RouteComponentProps> = ({ title, image
     </div>
   </div>
 );
+    }
 
-export default withRouter(MenuItem);
+export default MenuItem;

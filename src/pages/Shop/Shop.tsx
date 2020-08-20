@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { selectCollections } from 'src/store/shop/shop.selectors';
-import { ICollectionsState } from 'src/interfaces/states/collection.state';
 import CollectionOverview from 'src/components/Collections/CollectionOverview/CollectionOverview';
+import { Route, RouteComponentProps } from 'react-router-dom';
+import Collection from '../Collection/Collection';
 
-const Shop: React.FC = () => {
+
+const Shop: React.FC<RouteComponentProps> = (props) => {
+ 
+  console.log(props.match.path);
   return (
     <div className="shop-page">
-      <CollectionOverview />
+       <Route exact path= {`${props.match.path}`} component={CollectionOverview} />
+    
+       <Route path={`${props.match.path}/:collectionId`} component= {Collection} /> 
+       
     </div>
   );
 };

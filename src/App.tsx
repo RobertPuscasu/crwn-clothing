@@ -49,13 +49,14 @@ const App: React.FC = () => {
   return (
     <div>
       <TopBar />
-      <Switch>
-        <Route exact path="/" component={Main} />
-        <Route path="/shop" component={Shop} />
-        <Route path="/checkout" component={Checkout} />
-        <Route exact path="/signin" render={() => _.isEmpty(user) ? (<SignInAndSignUp />): (<Redirect to='/' />)  } />
-       
-      </Switch>
+     
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/checkout" component={Checkout} />
+          <Route exact path="/signin" render={() => _.isEmpty(user) ? (<SignInAndSignUp />): (<Redirect to='/' />)  } />
+        
+        </Switch>
     </div>
   );
 };
