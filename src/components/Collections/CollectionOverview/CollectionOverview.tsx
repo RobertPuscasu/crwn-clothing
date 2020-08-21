@@ -2,25 +2,19 @@ import React from 'react';
 import './style.scss';
 import CollectionPreview from '../CollectionPreview/CollectionPreview';
 import { useSelector } from 'react-redux';
-import { selectCollections } from 'src/store/shop/shop.selectors';
+import { selectCollections, selectCollectionsForPreview } from 'src/store/shop/shop.selectors';
 import { IShop } from 'src/interfaces/models/shop.model';
 
 const CollectionOverview: React.FC = () => {
-  const collections: {[key:string]: IShop} = useSelector(selectCollections);
-
-  const collectionPreview = () => {
-    const res: JSX.Element[] = [];
-    for (let key in collections) {
-      let value = collections[key];
-      res.push(<CollectionPreview key={value.id} {...value} />);
-    }
-    return res;
-  }
+  const collections: IShop[] = useSelector(selectCollectionsForPreview);
+  console.log();
 
   return (
     <div className="collection-overview">
       {
-          collectionPreview()
+          collections.map(shop => (
+            <CollectionPreview  key={shop.id} {...shop}/>
+          ))
       }
     </div>
   );
